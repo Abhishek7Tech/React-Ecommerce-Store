@@ -8,6 +8,7 @@ import {
   signInWithGoogleRedirect,
   // auth,
 } from "../../../utils/firebase/firebase.utils";
+import SignUpForm from "../../sign-up/sign-up.component";
 const SignIn = () => {
   const signInWIthGoogle = async () => {
     const { user } = await signInWithGooglePopUp();
@@ -32,6 +33,7 @@ const SignIn = () => {
   return (
     <div>
       <button onClick={signInWIthGoogle}>Sign in with Google</button>
+     <SignUpForm />
       {/* <button onClick={signInWIthGoogle2}>Sign in with Google Redirect</button> */}
     </div>
   );
