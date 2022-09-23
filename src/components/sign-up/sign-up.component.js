@@ -88,8 +88,7 @@ return (
                      value: confirmPassword 
                 }
             } />  
-            <Button children={'Sign Up'} buttonType = {'inverted'} otherProps = {{type:'submit'}} />
-            <button type="submit">Sign Up</button>
+            <Button children={'Sign Up'} buttonType = {'inverted'} otherprops = {{type:'submit'}} />
         </form>
     </div>
 )
