@@ -2,12 +2,10 @@ import Home from "./components/Routes/Home/home.component";
 import { Route, Routes} from "react-router-dom";
 import Navigation from "./components/Routes/navigation/navigation.component";
 import SignIn from "./components/Routes/authentication/authentication.component";
+import Shop from "./components/Routes/shop/shop.component";
 
 function App() {
  
-  const Shop = () => {
-    return <h1>Hi From Shop Page</h1>;
-  };
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>

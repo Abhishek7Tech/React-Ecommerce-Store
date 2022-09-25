@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import Button from "../button/button.component";
 import FormInput from "../from-input/form-input.component";
 import {
@@ -18,6 +18,7 @@ const SignInForm = () => {
   const { email, password } = formFields;
   console.log(formFields);
 
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -31,6 +32,7 @@ const SignInForm = () => {
   const signInWIthGoogle = async () => {
     console.log("Clicked");
     const { users } = await signInWithGooglePopUp();
+    
     // const userDocRef = await createUserDocumentsFromAuth(users);
   };
 
@@ -40,8 +42,7 @@ const SignInForm = () => {
       alert("Email and Password Required");
     }
     try {
-      const response = await signAuthWithEmailAndPassword(email, password);
-      console.log(response);
+      const {user} = await signAuthWithEmailAndPassword(email, password);      
       resetFormFields();
     } catch (err) {
       switch(err.code) {
