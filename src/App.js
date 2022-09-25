@@ -3,6 +3,7 @@ import { Route, Routes} from "react-router-dom";
 import Navigation from "./components/Routes/navigation/navigation.component";
 import SignIn from "./components/Routes/authentication/authentication.component";
 import Shop from "./components/Routes/shop/shop.component";
+import Checkout from "./components/checkout/checkout.component";
 
 function App() {
  
@@ -12,6 +13,7 @@ function App() {
         <Route index element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path = "/auth" element={<SignIn />}></Route>
+        <Route path = "/checkout" element={<Checkout />}></Route>
       </Route>
     </Routes>
   );
