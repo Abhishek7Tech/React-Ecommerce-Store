@@ -5,8 +5,8 @@ import "./products.styles.scss";
 
 const Products = ({ product }) => {
   const {addItemToCart} = useContext(CartDropDownContext);
-
-  return product.map((product) => {
+  console.log(product);
+  
     const {id, name, imageUrl, price } = product;
     const addProductToCartHandler = () => addItemToCart(product);
     console.log(id,name, imageUrl, price);
@@ -20,7 +20,6 @@ const Products = ({ product }) => {
         <Button buttonType="inverted" onClick = {addProductToCartHandler}>Add to cart</Button>
       </div>
     );
-  });
 };
 
 export default Products;
