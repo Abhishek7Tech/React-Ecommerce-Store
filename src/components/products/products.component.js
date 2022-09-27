@@ -9,7 +9,6 @@ const Products = ({ product }) => {
   
     const {id, name, imageUrl, price } = product;
     const addProductToCartHandler = () => addItemToCart(product);
-    console.log(id,name, imageUrl, price);
     return (
       <div key={id} className="product-card-container">
         <img src={imageUrl} alt={name}></img>

@@ -8,7 +8,6 @@ const CartIcon = () => {
     const {dropDown, setDropDown} = useContext(CartDropDownContext)
      const {cartCount} = useContext(CartDropDownContext);
     const dropDownHandler = () => {
-     console.log("Clicked");
      setDropDown(!dropDown);
    }
 return (
