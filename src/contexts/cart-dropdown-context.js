@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useReducer} from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
   const exsistingCartItem = cartItems.find(
@@ -48,46 +48,74 @@ export const CartDropDownContext = createContext({
   setCartItems: () => {},
   cartCount: 0,
   clearItem: () => {},
+  total: 0,
 });
 
-export const CartDropDownProvider = ({ children }) => {
-  const [dropDown, setDropDown] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [total, setTotal] = useState(0);
+export const INITIAL_STATE = {
+  dropDown: false,
+  cartItems: [],
+  cartCount: 0,
+  total: 0,
+};
 
-  useEffect(() => {
-    const newCartCount = cartItems.reduce(
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case "SET_CART_ITEMS":
+      return {
+        ...state,
+        ...payload,
+      };
+      case "SET_DROPDOWN":
+        return{
+          ...state,
+          dropDown:payload
+        }
+    default:
+      throw new Error(`unhandled type of ${type} in cartReducer`);
+  }
+};
+
+export const CartDropDownProvider = ({ children }) => {
+ 
+  const [{cartItems,dropDown,cartCount,total}, dispatch] = useReducer(cartReducer,INITIAL_STATE);
+
+  const updateCartItemReducer = (newCartItems) => {
+
+    const newCartCount = newCartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0
     );
 
-    setCartCount(newCartCount);
-  }, [cartItems]);
+    const totalHandler = newCartItems.reduce(
+      (total, cartItems) => total + cartItems.price * cartItems.quantity,
+      0
+    );
 
-
-  
-  useEffect(() => {
+      dispatch({type:'SET_CART_ITEMS', payload: {cartItems: newCartItems, cartCount: newCartCount, total: totalHandler}})
+    };
     
-    const totalHandler = cartItems.reduce(
-      (total, cartItems) => total + (cartItems.price * cartItems.quantity),0
-    )
+    const addItemToCart = (productToAdd) => {
+      const newCartItems = addCartItem(cartItems, productToAdd);
+      updateCartItemReducer(newCartItems);
+    };
+    
+    const removeItemFromCart = (productToRemove) => {
+      const newCartItems = removeCartItem(cartItems, productToRemove);
+      updateCartItemReducer(newCartItems);
+    };
+    
+    const clearItemFromCart = (productToRemove) => {
+      const newCartItems = clearCartItem(cartItems, productToRemove);
+      updateCartItemReducer(newCartItems);
+    };
+    
+    const setDropDown = (bool) => {
+    dispatch({type:'SET_DROPDOWN', payload: bool})
 
-    setTotal(totalHandler);
-  }, [cartItems]);
+  }
 
-  const addItemToCart = (productToAdd) => {
-    setCartItems(addCartItem(cartItems, productToAdd));
-  };
-
-  const removeItemFromCart = (productToRemove) => {
-    setCartItems(removeCartItem(cartItems, productToRemove));
-  };
-
-
-  const clearItemFromCart = (productToRemove) => {
-    setCartItems(clearCartItem(cartItems, productToRemove));
-  };
   const values = {
     dropDown,
     setDropDown,
@@ -96,7 +124,7 @@ export const CartDropDownProvider = ({ children }) => {
     removeItemFromCart,
     cartCount,
     clearItemFromCart,
-    total
+    total,
   };
   return (
     <CartDropDownContext.Provider value={values}>

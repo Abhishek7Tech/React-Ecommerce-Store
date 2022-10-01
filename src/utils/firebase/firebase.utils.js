@@ -57,11 +57,9 @@ export const addCollectionAndDocuments = async(collectionKey, objectsToAdd) => {
 export const getCategoriesAndDocuments = async() => {
   const collectionRef = collection(db, 'categories');
   const categoriesSnapShot = await getDocs(collectionRef);
-  const categoriesMap = categoriesSnapShot.docs.reduce((acc, categoriesSnapShot) => {
-    const {title, items} = categoriesSnapShot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, [])
+  const categoriesMap = categoriesSnapShot.docs.map((docs) => docs.data());
+  
+ 
   return categoriesMap;
 }
 
@@ -100,7 +98,6 @@ export const createAuthWithEmailAndPassword = async (email, password) => {
 
 export const signAuthWithEmailAndPassword = async(email, password) => {
   if(!email || !password) return;
-  console.log(email, password);
   return await signInWithEmailAndPassword(auth, email, password);
 }
 

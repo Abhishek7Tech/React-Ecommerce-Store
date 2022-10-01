@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import CategoryItem from "../category-main/category-item.component";
 import Products from "../products/products.component";
 import "./category-preview.styles.scss";
 
