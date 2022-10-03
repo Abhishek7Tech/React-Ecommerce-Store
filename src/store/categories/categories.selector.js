@@ -25,3 +25,10 @@ export const categoriesSelctor = createSelector(
     }, []);
   }
 );
+
+export const categoriesloadingSelector = createSelector(
+  [selectCategoryReducer],
+  (categories) => {
+   return categories.isLoading
+  }
+)
