@@ -16,4 +16,15 @@
       column-gap: 20px;
     }
   }
+
+  @media screen and (max-width:800px) {
+    .category-preview-container{
+      // width: 40vw;
+      align-items: center;
+
+      .preview{
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
   

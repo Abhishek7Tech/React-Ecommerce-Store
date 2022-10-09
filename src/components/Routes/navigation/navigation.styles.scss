@@ -25,3 +25,21 @@
     }
   }
   
+  @media screen and (max-width: 800px) {
+    .navigation {
+      height: 60px;
+      padding: 10px;
+      margin-bottom: 20px;
+    
+
+    .logo-container{
+      width: 50px;
+      padding: 0px;
+    }
+
+    .nav-links-container{
+      width: 80%;
+      justify-items: center;
+    }
+  }
+  }

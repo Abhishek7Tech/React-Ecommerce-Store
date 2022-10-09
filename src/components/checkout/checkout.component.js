@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useSelector } from "react-redux";
 import { selectCartItems, totalHandler } from "../../store/cart/cart.selector";
 import CheckoutItem from "../checkout-item/checkout,component";
@@ -7,7 +8,6 @@ import "./checkout.styles.scss";
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
   const total = useSelector(totalHandler);
-  console.log("CHECKOUT", cartItems, total);
 
   if (!cartItems) return;
 
@@ -31,13 +31,11 @@ const Checkout = () => {
         </div>
       </div>
       <div>
-      { cartItems.map((items) => {
-        return (
-         <CheckoutItem key ={items.id} cartItem = {items} />
-        );
-      })}
+        {cartItems.map((items) => {
+          return <CheckoutItem key={items.id} cartItem={items} />;
+        })}
       </div>
-      <span className="total" >Total: {total}$</span>
+      <span className="total">Total: {total}$</span>
       <PaymentForm />
     </div>
   );
